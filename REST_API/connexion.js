@@ -1,7 +1,7 @@
 const mysql = require("mysql2");
 
 var conn = mysql.createConnection({
-  database: "defaultdb",
+  database: "tp4_AppMobile",
   host: "tp3-appweb-dm-fr-cegeplimoilou-tp3-app-mobile.a.aivencloud.com",
   user: "felix-rheaume",
   password: "AVNS_V4i-HP6nBvWzKkTp4Gu",
