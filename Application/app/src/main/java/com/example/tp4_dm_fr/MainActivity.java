@@ -6,6 +6,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
             Fragment frag = null;
             int itemId = menuItem.getItemId();
-            if (itemId == R.id.premier) {
+            if (itemId == R.id.accueilItem) {
                 frag = new AccueilFragment();
             }
 
@@ -67,18 +68,22 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void onInscription(View view){
+    public void onInscription(View view) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame, new InscriptionFragment());
         transaction.commit();
         dLayout.closeDrawers();
     }
 
-    public void onConnexion(View view){
+    public void onConnexion(View view) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame, new ConnexionFragment());
         transaction.commit();
         dLayout.closeDrawers();
+    }
+
+    public void onAjouterPizza(View view) {
+        Toast.makeText(getApplicationContext(), "Pizza ajoutée", Toast.LENGTH_SHORT).show();
     }
 
 }
