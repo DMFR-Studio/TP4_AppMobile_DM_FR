@@ -3,4 +3,5 @@
     <string name="strMotDePasse">Le mot de passe doit contenir plus de 5 caractères</string>
     <string name="strCourrielInvalide">Courriel invalide</string>
     <string name="strNomInvaldie">Le nom doit contenir plus de 4 caractères</string>
+    <string name="strOk">OK</string>
 </resources>

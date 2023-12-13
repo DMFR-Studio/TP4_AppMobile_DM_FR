@@ -9,8 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,10 +21,14 @@ public class InscriptionFragment extends Fragment {
     private EditText nomInput;
     private EditText emailInput;
     private EditText passwordInput;
-    private Button connexionButton;
+    private EditText adresseInput;
+    private EditText telephoneInput;
+    private Button creationCompteButton;
     private boolean passwordIsValid;
     private boolean emailIsValid;
     private boolean nameIsValid;
+
+    ConsommationREST consoRest = new ConsommationREST();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,13 +44,14 @@ public class InscriptionFragment extends Fragment {
         nomInput = view.findViewById(R.id.nomEditText);
         emailInput = view.findViewById(R.id.emailEditText);
         passwordInput = view.findViewById(R.id.passwordEditText);
-        connexionButton = view.findViewById(R.id.creationCompteButton);
-        connexionButton.setEnabled(false);
-
+        adresseInput = view.findViewById(R.id.adresseEditText);
+        telephoneInput = view.findViewById(R.id.telephoneEditText);
+        creationCompteButton = view.findViewById(R.id.creationCompteButton);
+        creationCompteButton.setEnabled(false);
         nomInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                connexionButton.setEnabled(areFieldsValid());
+                creationCompteButton.setEnabled(areFieldsValid());
             }
 
             @Override
@@ -59,14 +66,14 @@ public class InscriptionFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                connexionButton.setEnabled(areFieldsValid());
+                creationCompteButton.setEnabled(areFieldsValid());
             }
         });
 
         emailInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                connexionButton.setEnabled(areFieldsValid());
+                creationCompteButton.setEnabled(areFieldsValid());
             }
 
             @Override
@@ -81,14 +88,14 @@ public class InscriptionFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                connexionButton.setEnabled(areFieldsValid());
+                creationCompteButton.setEnabled(areFieldsValid());
             }
         });
 
         passwordInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                connexionButton.setEnabled(areFieldsValid());
+                creationCompteButton.setEnabled(areFieldsValid());
             }
 
             @Override
@@ -103,7 +110,21 @@ public class InscriptionFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                connexionButton.setEnabled(areFieldsValid());
+                creationCompteButton.setEnabled(areFieldsValid());
+            }
+        });
+
+        creationCompteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                consoRest.addUser(
+                        view.getContext(),
+                        nomInput.getText().toString(),
+                        emailInput.getText().toString(),
+                        passwordInput.getText().toString(),
+                        adresseInput.getText().toString(),
+                        telephoneInput.getText().toString()
+                );
             }
         });
     }
@@ -125,4 +146,5 @@ public class InscriptionFragment extends Fragment {
     private boolean areFieldsValid() {
         return emailIsValid && passwordIsValid && nameIsValid;
     }
+
 }

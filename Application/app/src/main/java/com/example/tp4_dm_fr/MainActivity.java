@@ -14,8 +14,6 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
-
-
     DrawerLayout dLayout;
 
     @Override
@@ -34,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         setNavigationDrawer();
-
         afficherAccueilFragment();
     }
 
@@ -84,16 +81,4 @@ public class MainActivity extends AppCompatActivity {
         dLayout.closeDrawers();
     }
 
-    public void onCreationCompte(View view){
-        //TODO: faire le call d'api
-        Toast.makeText(getApplicationContext(), "Inscription réussie", Toast.LENGTH_SHORT).show();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame, new AccueilFragment());
-        transaction.commit();
-    }
-
-    public void onLogin(View view){
-        //TODO: faire le call d'api
-
-    }
 }

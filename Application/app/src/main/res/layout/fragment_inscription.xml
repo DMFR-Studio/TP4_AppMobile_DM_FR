@@ -15,11 +15,10 @@
         android:textAllCaps="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText5"
-        android:onClick="onCreationCompte"/>
+        app:layout_constraintTop_toBottomOf="@+id/telephoneEditText" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/inscriptionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -40,7 +39,7 @@
         android:hint="Nom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/inscriptionTextView" />
 
     <EditText
         android:id="@+id/emailEditText"
@@ -67,7 +66,7 @@
         app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
 
     <EditText
-        android:id="@+id/editTextText4"
+        android:id="@+id/adresseEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -79,7 +78,7 @@
         app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
 
     <EditText
-        android:id="@+id/editTextText5"
+        android:id="@+id/telephoneEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -88,5 +87,5 @@
         android:hint="Téléphone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText4" />
+        app:layout_constraintTop_toBottomOf="@+id/adresseEditText" />
 </androidx.constraintlayout.widget.ConstraintLayout>
