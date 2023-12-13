@@ -45,7 +45,7 @@ public class ConnectedActivity extends AppCompatActivity {
     }
 
     private void setNavigationDrawer() {
-        dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        dLayout = (DrawerLayout) findViewById(R.id.drawer_connected_layout);
         NavigationView navView = (NavigationView) findViewById(R.id.navigation);
 
 
@@ -54,13 +54,13 @@ public class ConnectedActivity extends AppCompatActivity {
 
             Fragment frag = null;
             int itemId = menuItem.getItemId();
-            if (itemId == R.id.premier) {
+            if (itemId == R.id.accueilItem) {
                 frag = new AccueilFragment();
             }
 
             if (frag != null) {
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame, frag);
+                transaction.replace(R.id.frameConnected, frag);
                 transaction.commit();
                 dLayout.closeDrawers();
                 return true;

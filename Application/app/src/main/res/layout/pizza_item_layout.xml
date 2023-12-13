@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/pizzaImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:maxWidth="0dp"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.4"
+        app:layout_constraintHeight_percent="0.8"/>
+
+    <TextView
+        android:id="@+id/nomPizzatextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:text="Fromage"
+        app:layout_constraintStart_toEndOf="@+id/pizzaImageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/formatTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="petite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/nomPizzatextView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/prixtextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="0.00"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/nomPizzatextView"
+        app:layout_constraintTop_toBottomOf="@+id/formatTextView" />
+
+    <Spinner
+        android:id="@+id/spinnerFormat"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.1"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/prixtextView"
+        app:layout_constraintStart_toStartOf="@+id/nomPizzatextView"
+        app:layout_constraintTop_toBottomOf="@+id/prixtextView" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="ajouter"
+        android:backgroundTint="@color/black"
+        android:textAllCaps="true"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerFormat"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerFormat"
+        android:onClick="onAjouterPizza"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

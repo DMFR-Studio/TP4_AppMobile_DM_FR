@@ -21,17 +21,7 @@
             android:id="@+id/frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
-<!--            <include layout="@layout/accueil"/>-->
         </FrameLayout>
-<!--        <include layout="@layout/accueil" android:id="@+id/accueilLayout"/>-->
-        <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:id="@+id/accueil">-->
-
-
-
-        <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
 

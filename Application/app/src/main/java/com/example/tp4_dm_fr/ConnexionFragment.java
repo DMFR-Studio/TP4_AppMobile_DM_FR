@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.navigation.NavigationView;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -97,8 +99,13 @@ public class ConnexionFragment extends Fragment {
                         new OnLoginResultListener() {
                             @Override
                             public void onLoginResult(boolean success, int id) {
-                                if (success && id != 0) {
+                                if (true) {
+                                //if (success && id != 0) {
                                     //TODO change view
+                                    NavigationView navView = (NavigationView) view.findViewById(R.id.navigation);
+                                    for (int i = 0; i < navView.getMenu().size(); i++) {
+                                        navView.getMenu().getItem(i).setVisible(true);
+                                    }
                                 } else {
                                     AlertDialog.Builder alert = createAlertWindow(view.getContext(), "Erreur", "Le courriel ou le mot de passe est invalide");
                                     alert.create().show();
@@ -108,9 +115,6 @@ public class ConnexionFragment extends Fragment {
                 );
             }
         });
-
-
-
 
     }
 
