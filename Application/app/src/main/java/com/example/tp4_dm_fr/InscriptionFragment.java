@@ -123,8 +123,16 @@ public class InscriptionFragment extends Fragment {
                         emailInput.getText().toString(),
                         passwordInput.getText().toString(),
                         adresseInput.getText().toString(),
-                        telephoneInput.getText().toString()
-                );
+                        telephoneInput.getText().toString(),
+                        new OnUserAddedListener() {
+                            @Override
+                            public void onUserAdded(int id) {
+                                if (id != 0) {
+                                    //TODO client est créé et logged in
+                                }
+                            }
+                        });
+
             }
         });
     }

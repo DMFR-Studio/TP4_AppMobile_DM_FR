@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
+    public static Client clientLoggedIn = new Client();
     DrawerLayout dLayout;
 
     @Override

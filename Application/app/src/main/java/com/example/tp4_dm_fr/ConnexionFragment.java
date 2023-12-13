@@ -1,5 +1,7 @@
 package com.example.tp4_dm_fr;
 
+import static com.example.tp4_dm_fr.MainActivity.clientLoggedIn;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -26,7 +28,6 @@ public class ConnexionFragment extends Fragment {
     private EditText passwordInput;
     private boolean passwordIsValid;
     private boolean emailIsValid;
-    private boolean userLoggedIn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -92,16 +93,25 @@ public class ConnexionFragment extends Fragment {
                 consoRest.logInUser(
                         view.getContext(),
                         emailInput.getText().toString(),
-                        passwordInput.getText().toString());
-
-                if(userLoggedIn){
-                    //TODO change view
-                } else {
-                    AlertDialog.Builder alert = createAlertWindow(view.getContext(), "Erreur", "Le courriel ou le mot de passe est invalide");
-                    alert.create().show();
-                }
+                        passwordInput.getText().toString(),
+                        new OnLoginResultListener() {
+                            @Override
+                            public void onLoginResult(boolean success, int id) {
+                                if (success && id != 0) {
+                                    //TODO change view
+                                } else {
+                                    AlertDialog.Builder alert = createAlertWindow(view.getContext(), "Erreur", "Le courriel ou le mot de passe est invalide");
+                                    alert.create().show();
+                                }
+                            }
+                        }
+                );
             }
         });
+
+
+
+
     }
 
     private boolean isEmailValid() {
