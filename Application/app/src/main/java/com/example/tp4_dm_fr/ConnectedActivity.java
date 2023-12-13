@@ -1,19 +1,18 @@
 package com.example.tp4_dm_fr;
 
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
-import android.view.Gravity;
-import android.view.View;
-import android.widget.Toast;
-
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class ConnectedActivity extends AppCompatActivity {
 
 
     DrawerLayout dLayout;
@@ -35,11 +34,11 @@ public class MainActivity extends AppCompatActivity {
 
         setNavigationDrawer();
 
-        afficherAccueilFragment();
+        afficherAccueilConnecteFragment();
     }
 
-    private void afficherAccueilFragment() {
-        Fragment frag = new AccueilFragment();
+    private void afficherAccueilConnecteFragment() {
+        Fragment frag = new AccueilConnecteFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame, frag);
         transaction.commit();
@@ -69,31 +68,5 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
     }
-
-    public void onInscription(View view){
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame, new InscriptionFragment());
-        transaction.commit();
-        dLayout.closeDrawers();
-    }
-
-    public void onConnexion(View view){
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame, new ConnexionFragment());
-        transaction.commit();
-        dLayout.closeDrawers();
-    }
-
-    public void onCreationCompte(View view){
-        //TODO: faire le call d'api
-        Toast.makeText(getApplicationContext(), "Inscription réussie", Toast.LENGTH_SHORT).show();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame, new AccueilFragment());
-        transaction.commit();
-    }
-
-    public void onLogin(View view){
-        //TODO: faire le call d'api
-
-    }
 }
+
