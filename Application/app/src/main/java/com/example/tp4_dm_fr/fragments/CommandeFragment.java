@@ -1,5 +1,8 @@
 package com.example.tp4_dm_fr.fragments;
 
+import static com.example.tp4_dm_fr.MainActivity.commande;
+import static com.example.tp4_dm_fr.MainActivity.listePizzasCommande;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,28 +28,30 @@ public class CommandeFragment extends Fragment {
     private TextView quantiteTextView;
     private Button ajouterBouton;
     private Button enleverBouton;
+    private TextView montantCommande;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.commande_layout, container, false);
         ajouterSamplePizzas(view);
+        montantCommande = (TextView) view.findViewById(R.id.montantCommande);
+
+        if(commande != null){
+            montantCommande.setText(String.valueOf(commande.getMontant()));
+        } else {
+            montantCommande.setText("0");
+        }
+
         return view;
     }
 
     public void ajouterSamplePizzas(View view) {
-        //TODO: remplacer par les vraies pizzas de la commande
         ListView listView = view.findViewById(R.id.commandeListView); // Assurez-vous d'avoir un ListView dans votre layout XML
-        List<PizzaItem> items = new ArrayList<>();
-//        items.add(new PizzaItem(R.drawable.image_pizza_1, "Texte 1", PizzaItem.Format.MOYENNE, 5.00));
-//        items.add(new PizzaItem(R.drawable.image_pizza_1, "Texte 2", PizzaItem.Format.LARGE, 7.00));
-//        items.add(new PizzaItem(R.drawable.image_pizza_1, "Texte 2", PizzaItem.Format.LARGE, 7.00));
-//        items.add(new PizzaItem(R.drawable.image_pizza_1, "Texte 2", PizzaItem.Format.LARGE, 7.00));
 
-        CommandeItemAdapter adapter = new CommandeItemAdapter(getContext(), items);
+        CommandeItemAdapter adapter = new CommandeItemAdapter(getContext(), listePizzasCommande);
         listView.setAdapter(adapter);
-
-        //TODO: faire la somme de toutes les pizzas de la commande
     }
+
 
     //TODO: manque le listener au clic du bouton "Add to card" et la logique des points
 }

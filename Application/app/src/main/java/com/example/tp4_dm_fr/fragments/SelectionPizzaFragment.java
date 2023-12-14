@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
@@ -18,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SelectionPizzaFragment extends Fragment {
-
     private View view;
     ConsommationREST consoRest = new ConsommationREST();
 

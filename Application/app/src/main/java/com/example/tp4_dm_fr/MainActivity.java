@@ -21,8 +21,15 @@ import com.example.tp4_dm_fr.fragments.ProfilFragment;
 import com.example.tp4_dm_fr.fragments.SelectionPizzaFragment;
 import com.google.android.material.navigation.NavigationView;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     public static Client clientLoggedIn = new Client();
+    public static Commande commande = null;
+    public static List<PizzaItem> listePizzasCommande = new ArrayList<>();
     DrawerLayout dLayout;
 
     @Override

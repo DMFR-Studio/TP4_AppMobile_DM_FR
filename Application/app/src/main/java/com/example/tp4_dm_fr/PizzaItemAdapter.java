@@ -1,5 +1,9 @@
 package com.example.tp4_dm_fr;
 
+import static com.example.tp4_dm_fr.MainActivity.clientLoggedIn;
+import static com.example.tp4_dm_fr.MainActivity.commande;
+import static com.example.tp4_dm_fr.MainActivity.listePizzasCommande;
+
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,10 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class PizzaItemAdapter extends ArrayAdapter {
@@ -32,6 +38,7 @@ public class PizzaItemAdapter extends ArrayAdapter {
         TextView nomPizza = listItemView.findViewById(R.id.nomPizzatextView);
         TextView format = listItemView.findViewById(R.id.formatTextView);
         TextView prix = listItemView.findViewById(R.id.prixtextView);
+        Button ajouterPizza = listItemView.findViewById(R.id.ajouterPizza);
         Spinner spinnerFormat = listItemView.findViewById(R.id.spinnerFormat);
 
         PizzaItem currentItem = itemList.get(position);
@@ -60,7 +67,6 @@ public class PizzaItemAdapter extends ArrayAdapter {
 
                 prix.setText(String.valueOf(selectedPrice));
                 format.setText(selectedType);
-                Log.i("selectedItem", String.valueOf(selectedPrice));
             }
 
             @Override
@@ -69,8 +75,21 @@ public class PizzaItemAdapter extends ArrayAdapter {
             }
         });
 
-        //TODO: ajouter la pizza dans l'instance statique du client (je suggère d'ajouter un
-        // attribut qui représente la commande dans le client)
+        ajouterPizza.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                double montant = Double.parseDouble(prix.getText().toString());
+                if(commande == null){
+                    LocalDate date = LocalDate.now();
+                    commande = new Commande(montant,clientLoggedIn.getAdresse(),String.valueOf(date),2);
+//                    commande = new Commande(montant,clientLoggedIn.getAdresse(),String.valueOf(date),clientLoggedIn.getId());
+                } else {
+                    commande.setMontant(commande.getMontant() + montant);
+                }
+                listePizzasCommande.add(currentItem);
+
+            }
+        });
 
         return listItemView;
     }

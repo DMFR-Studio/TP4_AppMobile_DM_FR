@@ -89,7 +89,9 @@ public class ConsommationREST {
                     // Handle successful response (status 200)
                     try {
                         int idClient = response.getInt("id");
+                        String adresseClient = response.getString("adresse");
                         clientLoggedIn.setId(idClient);
+                        clientLoggedIn.setAdresse(adresseClient);
                         listener.onLoginResult(true, idClient);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -104,6 +106,31 @@ public class ConsommationREST {
                 });
 
         queue.add(jsonObjectRequest);
+    }
+
+    public void getCommande(Context context, String clientId, OnCommandeResponseListener listener) {
+        String url = "http://192.168.2.134:8081/getCommandes?id=" + clientId;
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                response -> {
+                    // Traitement de la réponse
+                    listener.onCommandeResponse(response);
+                },
+                error -> {
+                    // Gestion de l'erreur
+                    Log.e("api", String.valueOf(error));
+                    listener.onCommandeError();
+                });
+
+        queue.add(stringRequest);
+    }
+
+    public interface OnCommandeResponseListener {
+        void onCommandeResponse(String response);
+
+        void onCommandeError();
     }
 
     public void getPizza(Context context, String pizzaId, OnPizzaResponseListener listener) {

@@ -1,5 +1,7 @@
 package com.example.tp4_dm_fr;
 
+import static com.example.tp4_dm_fr.MainActivity.commande;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,6 +53,9 @@ public class CommandeItemAdapter extends ArrayAdapter {
                 //extrait le montant du textView ayant le prix unitaire d'une pizza
                 String montantString = prix.getText().toString().substring(prix.getText().toString().indexOf(":") + 1).trim();
                 total.setText("Total: " + Double.parseDouble(montantString) * (quantite + 1));
+                if(commande != null){
+                    commande.setMontant(commande.getMontant() + Double.parseDouble(total.getText().toString()));
+                }
             }
         });
 
@@ -64,6 +69,9 @@ public class CommandeItemAdapter extends ArrayAdapter {
                     quantiteTextView.setText(String.valueOf(quantite - 1));
                     String montantString = prix.getText().toString().substring(prix.getText().toString().indexOf(":") + 1).trim();
                     total.setText("Total: " + Double.parseDouble(montantString) * (quantite - 1));
+                    if(commande != null){
+                        commande.setMontant(commande.getMontant() + Double.parseDouble(total.getText().toString()));
+                    }
                 }
             }
         });
