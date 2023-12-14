@@ -43,7 +43,13 @@ public class SelectionPizzaFragment extends Fragment {
                     if(pizzaItem.getSorte().equals("Fromage")){
                         image = R.drawable.fromage;
                     } else if(pizzaItem.getSorte().equals("Pepperoni")){
-                        image = R.drawable.image_pizza_1;
+                        image = R.drawable.pepperoni;
+                    } else if(pizzaItem.getSorte().equals("Garnie")){
+                        image = R.drawable.garnie;
+                    } else if(pizzaItem.getSorte().equals("Hawaienne")){
+                        image = R.drawable.hawaienne;
+                    } else if(pizzaItem.getSorte().equals("Bacon")){
+                        image = R.drawable.bacon;
                     }
                     items.add(new PizzaItem(image, pizzaItem.getSorte(), pizzaItem.getType(), pizzaItem.getPrix()));
                 }

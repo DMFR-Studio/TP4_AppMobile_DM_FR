@@ -25,7 +25,6 @@ import java.util.Map;
 public class ConsommationREST {
     public void addUser(Context context, String nom, String courriel, String mot_de_passe, String adresse, String telephone, OnUserAddedListener listener) {
         String url = "http://192.168.0.119:8081/addClient";
-
         RequestQueue queue = Volley.newRequestQueue(context);
 
         JSONObject postData = new JSONObject();
@@ -39,14 +38,13 @@ public class ConsommationREST {
             e.printStackTrace();
         }
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, postData,
                 response -> {
                     // Handle successful response (status 200)
                     try {
-                        JSONObject jsonResponse = new JSONObject(response);
-                        int idClient = jsonResponse.getInt("id");
-                        String adresseClient = jsonResponse.getString("adresse");
-                        double pointsClient = jsonResponse.getDouble("points");
+                        int idClient = response.getInt("id");
+                        String adresseClient = response.getString("adresse");
+                        double pointsClient = response.getDouble("points");
                         clientLoggedIn.setId(idClient);
                         clientLoggedIn.setAdresse(adresseClient);
                         clientLoggedIn.setPoints(pointsClient);
@@ -55,27 +53,17 @@ public class ConsommationREST {
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Log.e("api", "Error parsing JSON");
+                        listener.onUserAdded(0);
                     }
                 },
                 error -> {
                     // Handle error
                     Log.e("api", String.valueOf(error));
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("nom", nom);
-                params.put("courriel", courriel);
-                params.put("mot_de_passe", mot_de_passe);
-                params.put("adresse", adresse);
-                params.put("telephone", telephone);
-                return params;
-            }
-        };
+                    listener.onUserAdded(0);
+                });
 
-        queue.add(stringRequest);
+        queue.add(jsonObjectRequest);
     }
-
 
     public void logInUser(Context context, String courriel, String mot_de_passe, OnLoginResultListener listener) {
         String url = "http://192.168.0.119:8081/logIn";
@@ -115,76 +103,6 @@ public class ConsommationREST {
         queue.add(jsonObjectRequest);
     }
 
-    public void getClient(Context context, String clientId, OnClientResponseListener listener) {
-        String url = "http://192.168.0.119:8081/getClient?id=" + clientId;
-        Client client = new Client();
-
-        RequestQueue queue = Volley.newRequestQueue(context);
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                response -> {
-                    // Traitement de la réponse
-                    listener.onClientResponse(response);
-                },
-                error -> {
-                    // Gestion de l'erreur
-                    Log.e("api", String.valueOf(error));
-                    listener.onClientError();
-                });
-
-        queue.add(stringRequest);
-    }
-
-    public interface OnClientResponseListener {
-        void onClientResponse(String response);
-
-        void onClientError();
-    }
-
-    public void getCommande(Context context, String clientId, OnCommandeResponseListener listener) {
-        String url = "http://192.168.0.119:8081/getCommandes?id=" + clientId;
-
-        RequestQueue queue = Volley.newRequestQueue(context);
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                response -> {
-                    // Traitement de la réponse
-                    listener.onCommandeResponse(response);
-                },
-                error -> {
-                    // Gestion de l'erreur
-                    Log.e("api", String.valueOf(error));
-                    listener.onCommandeError();
-                });
-
-        queue.add(stringRequest);
-    }
-
-    public interface OnCommandeResponseListener {
-        void onCommandeResponse(String response);
-
-        void onCommandeError();
-    }
-
-    public void getPizza(Context context, String pizzaId, OnPizzaResponseListener listener) {
-        String url = "http://192.168.0.119:8081/getPizza?id=" + pizzaId;
-
-        RequestQueue queue = Volley.newRequestQueue(context);
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                response -> {
-                    // Traitement de la réponse
-                    listener.onPizzaResponse(response);
-                },
-                error -> {
-                    // Gestion de l'erreur
-                    Log.e("api", String.valueOf(error));
-                    listener.onPizzaError();
-                });
-
-        queue.add(stringRequest);
-    }
-
     public void getAllPizzas(Context context, OnAllPizzasResponseListener listener) {
         String url = "http://192.168.0.119:8081/getAllPizzas";
 
@@ -211,18 +129,10 @@ public class ConsommationREST {
         return gson.fromJson(response, listType);
     }
 
-    public interface OnPizzaResponseListener {
-        void onPizzaResponse(String response);
-
-        void onPizzaError();
-    }
-
     public interface OnAllPizzasResponseListener {
         void onAllPizzasResponse(List<PizzaItem> pizzaItemList);
 
         void onAllPizzasError();
     }
-
-
 
 }

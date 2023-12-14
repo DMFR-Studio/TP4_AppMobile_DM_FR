@@ -12,18 +12,18 @@
         <item
             android:id="@+id/pizzasItem"
             android:title="Pizzas"
-            android:visible="true" />
+            android:visible="false" />
         <item
             android:id="@+id/profilItem"
             android:title="Profil"
-            android:visible="true" />
+            android:visible="false" />
         <item
             android:id="@+id/commandesItem"
             android:title="Mes commandes"
-            android:visible="true" />
+            android:visible="false" />
         <item
             android:id="@+id/pointsItem"
             android:title="Mes points"
-            android:visible="true" />
+            android:visible="false" />
     </group>
 </menu>

@@ -101,18 +101,19 @@ public class ConnexionFragment extends Fragment {
                             @Override
                             public void onLoginResult(boolean success, int id) {
                                 if (success && id != 0) {
+                                    FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                                    transaction.replace(R.id.frame, new SelectionPizzaFragment());
+                                    transaction.commit();
 
-                                    //TODO: tester si le changement de vue fonctionne
-//                                    FragmentTransaction transaction = new ConnexionFragment().getChildFragmentManager().beginTransaction();
-//                                    transaction.replace(R.id.frame, new SelectionPizzaFragment());
-//                                    transaction.commit();
-//                                    ((ImageView)(view.findViewById(R.id.icone_user))).setVisibility(View.VISIBLE);
-//                                    NavigationView navView = (NavigationView) view.findViewById(R.id.navigation);
-//                                    for (int i = 0; i < navView.getMenu().size(); i++) {
-//                                        navView.getMenu().getItem(i).setVisible(true);
-//                                    }
+                                    NavigationView navView = requireActivity().findViewById(R.id.navigation);
+//                                    ImageView iconeUser = navView.findViewById(R.id.icone_user);
+//                                    iconeUser.setVisibility(View.VISIBLE);
+
+                                    for (int i = 0; i < navView.getMenu().size(); i++) {
+                                        navView.getMenu().getItem(i).setVisible(true);
+                                    }
                                 } else {
-                                    AlertDialog.Builder alert = createAlertWindow(view.getContext(), "Erreur", "Le courriel ou le mot de passe est invalide");
+                                    AlertDialog.Builder alert = createAlertWindow(requireContext(), "Erreur", "Le courriel ou le mot de passe est invalide");
                                     alert.create().show();
                                 }
                             }

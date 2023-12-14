@@ -1,5 +1,7 @@
 package com.example.tp4_dm_fr.fragments;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -8,12 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.tp4_dm_fr.ConsommationREST;
 import com.example.tp4_dm_fr.customListener.OnUserAddedListener;
 import com.example.tp4_dm_fr.R;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -57,7 +62,7 @@ public class InscriptionFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!isNameValid()){
+                if (!isNameValid()) {
                     nomInput.setError(getText(R.string.strNomInvaldie));
                     nameIsValid = false;
                 } else {
@@ -79,7 +84,7 @@ public class InscriptionFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!isEmailValid()){
+                if (!isEmailValid()) {
                     emailInput.setError(getText(R.string.strCourrielInvalide));
                     emailIsValid = false;
                 } else {
@@ -101,7 +106,7 @@ public class InscriptionFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!isPasswordValid()){
+                if (!isPasswordValid()) {
                     passwordInput.setError(getText(R.string.strMotDePasse));
                     passwordIsValid = false;
                 } else {
@@ -129,7 +134,20 @@ public class InscriptionFragment extends Fragment {
                             @Override
                             public void onUserAdded(int id) {
                                 if (id != 0) {
-                                    //TODO client est créé et logged in
+                                    FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                                    transaction.replace(R.id.frame, new SelectionPizzaFragment());
+                                    transaction.commit();
+
+                                    NavigationView navView = requireActivity().findViewById(R.id.navigation);
+//                                    ImageView iconeUser = navView.findViewById(R.id.icone_user);
+//                                    iconeUser.setVisibility(View.VISIBLE);
+
+                                    for (int i = 0; i < navView.getMenu().size(); i++) {
+                                        navView.getMenu().getItem(i).setVisible(true);
+                                    }
+                                } else {
+                                    AlertDialog.Builder alert = createAlertWindow(requireContext(), "Erreur", "Veuillez réessayer");
+                                    alert.create().show();
                                 }
                             }
                         });
@@ -142,7 +160,7 @@ public class InscriptionFragment extends Fragment {
         return passwordInput.getText().toString().length() > 5;
     }
 
-    private boolean isNameValid(){
+    private boolean isNameValid() {
         return nomInput.getText().toString().length() > 4;
     }
 
@@ -154,6 +172,23 @@ public class InscriptionFragment extends Fragment {
 
     private boolean areFieldsValid() {
         return emailIsValid && passwordIsValid && nameIsValid;
+    }
+
+    private AlertDialog.Builder createAlertWindow(Context context, String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View dialogView = getLayoutInflater().inflate(R.layout.alert_dialog_layout, null);
+        TextView alertMessageTextView = dialogView.findViewById(R.id.alertMessageTextView);
+
+        alertMessageTextView.setText(message);
+
+        builder.setView(dialogView);
+        builder.setTitle(title);
+        builder.setPositiveButton(getText(R.string.strOk), (dialog, which) -> {
+            emailInput.setText("");
+            passwordInput.setText("");
+        });
+
+        return builder;
     }
 
 }
