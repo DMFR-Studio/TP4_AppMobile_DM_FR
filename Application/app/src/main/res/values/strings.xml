@@ -3,6 +3,20 @@
     <string name="strMotDePasse">Le mot de passe doit contenir plus de 5 caractères</string>
     <string name="strCourrielInvalide">Courriel invalide</string>
     <string name="strNomInvaldie">Le nom doit contenir plus de 4 caractères</string>
-    <string name="strOk">OK</string>
+
+    <string name="strAddToCard">ADD TO CART</string>
     <string name="mes_points">Mes points</string>
+    <string name="strPasserCaisse">Passer à la caisse pour paiement par carte"</string>
+
+    <string name="strOk">OK</string>
+    <string name="strOui">OUI</string>
+    <string name="strNon">NON</string>
+
+    <string name="strErreur">ERREUR</string>
+    <string name="strReesayer">Veuillez réessayer</string>
+    <string name="strCourrielouMdpInvalide">Le courriel ou le mot de passe est invalide</string>
+
+    <string name="strPizza">Pizza</string>
+    <string name="strErreurPizza">Erreur lors de la récupération de la liste de pizzas</string>
+
 </resources>

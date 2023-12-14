@@ -1,4 +1,4 @@
-package com.example.tp4_dm_fr;
+package com.example.tp4_dm_fr.adapter;
 
 import android.os.Bundle;
 import android.view.Gravity;
@@ -10,12 +10,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.tp4_dm_fr.R;
 import com.example.tp4_dm_fr.fragments.AccueilConnecteFragment;
 import com.example.tp4_dm_fr.fragments.AccueilFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class ConnectedActivity extends AppCompatActivity {
-
 
     DrawerLayout dLayout;
 
@@ -33,9 +33,7 @@ public class ConnectedActivity extends AppCompatActivity {
             }
         });
 
-
         setNavigationDrawer();
-
         afficherAccueilConnecteFragment();
     }
 
@@ -49,7 +47,6 @@ public class ConnectedActivity extends AppCompatActivity {
     private void setNavigationDrawer() {
         dLayout = (DrawerLayout) findViewById(R.id.drawer_connected_layout);
         NavigationView navView = (NavigationView) findViewById(R.id.navigation);
-
 
         navView.setNavigationItemSelectedListener(menuItem -> {
             dLayout.close();

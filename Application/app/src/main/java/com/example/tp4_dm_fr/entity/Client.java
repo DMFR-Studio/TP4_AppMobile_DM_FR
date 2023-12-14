@@ -1,4 +1,4 @@
-package com.example.tp4_dm_fr;
+package com.example.tp4_dm_fr.entity;
 
 public class Client {
 

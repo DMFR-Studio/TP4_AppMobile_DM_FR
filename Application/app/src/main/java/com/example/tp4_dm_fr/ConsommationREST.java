@@ -12,15 +12,15 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.tp4_dm_fr.customListener.OnAllPizzasResponseListener;
 import com.example.tp4_dm_fr.customListener.OnLoginResultListener;
 import com.example.tp4_dm_fr.customListener.OnUserAddedListener;
+import com.example.tp4_dm_fr.entity.PizzaItem;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ConsommationREST {
     public void addUser(Context context, String nom, String courriel, String mot_de_passe, String adresse, String telephone, OnUserAddedListener listener) {
@@ -127,12 +127,6 @@ public class ConsommationREST {
         Gson gson = new Gson();
         Type listType = new TypeToken<List<PizzaItem>>(){}.getType();
         return gson.fromJson(response, listType);
-    }
-
-    public interface OnAllPizzasResponseListener {
-        void onAllPizzasResponse(List<PizzaItem> pizzaItemList);
-
-        void onAllPizzasError();
     }
 
 }

@@ -9,9 +9,11 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tp4_dm_fr.entity.Client;
+import com.example.tp4_dm_fr.entity.Commande;
+import com.example.tp4_dm_fr.entity.PizzaItem;
 import com.example.tp4_dm_fr.fragments.AccueilFragment;
 import com.example.tp4_dm_fr.fragments.CommandeFragment;
 import com.example.tp4_dm_fr.fragments.ConnexionFragment;
@@ -21,9 +23,7 @@ import com.example.tp4_dm_fr.fragments.ProfilFragment;
 import com.example.tp4_dm_fr.fragments.SelectionPizzaFragment;
 import com.google.android.material.navigation.NavigationView;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
     private void setNavigationDrawer() {
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navView = (NavigationView) findViewById(R.id.navigation);
-
 
         navView.setNavigationItemSelectedListener(menuItem -> {
             dLayout.close();

@@ -41,7 +41,7 @@ public class ConnexionFragment extends Fragment {
         return view;
     }
 
-    public void initInputField(View view){
+    public void initInputField(View view) {
         emailInput = view.findViewById(R.id.emailLogIn);
         passwordInput = view.findViewById(R.id.passwordLogin);
         connexionLogInButton = view.findViewById(R.id.connexionLogInButton);
@@ -54,7 +54,7 @@ public class ConnexionFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!isEmailValid()){
+                if (!isEmailValid()) {
                     emailInput.setError(getText(R.string.strCourrielInvalide));
                     emailIsValid = false;
                 } else {
@@ -76,7 +76,7 @@ public class ConnexionFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!isPasswordValid()){
+                if (!isPasswordValid()) {
                     passwordInput.setError(getText(R.string.strMotDePasse));
                     passwordIsValid = false;
                 } else {
@@ -113,7 +113,7 @@ public class ConnexionFragment extends Fragment {
                                         navView.getMenu().getItem(i).setVisible(true);
                                     }
                                 } else {
-                                    AlertDialog.Builder alert = createAlertWindow(requireContext(), "Erreur", "Le courriel ou le mot de passe est invalide");
+                                    AlertDialog.Builder alert = createAlertWindow(requireContext(), (String) getText(R.string.strErreur), (String) getText(R.string.strCourrielouMdpInvalide));
                                     alert.create().show();
                                 }
                             }

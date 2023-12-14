@@ -146,12 +146,11 @@ public class InscriptionFragment extends Fragment {
                                         navView.getMenu().getItem(i).setVisible(true);
                                     }
                                 } else {
-                                    AlertDialog.Builder alert = createAlertWindow(requireContext(), "Erreur", "Veuillez réessayer");
+                                    AlertDialog.Builder alert = createAlertWindow(requireContext(), (String) getText(R.string.strErreur), (String) getText(R.string.strReesayer));
                                     alert.create().show();
                                 }
                             }
                         });
-
             }
         });
     }

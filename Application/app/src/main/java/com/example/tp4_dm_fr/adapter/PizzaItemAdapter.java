@@ -1,11 +1,10 @@
-package com.example.tp4_dm_fr;
+package com.example.tp4_dm_fr.adapter;
 
 import static com.example.tp4_dm_fr.MainActivity.clientLoggedIn;
 import static com.example.tp4_dm_fr.MainActivity.commande;
 import static com.example.tp4_dm_fr.MainActivity.listePizzasCommande;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +14,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.example.tp4_dm_fr.R;
+import com.example.tp4_dm_fr.entity.Commande;
+import com.example.tp4_dm_fr.entity.PizzaItem;
 
 import java.time.LocalDate;
 import java.util.List;

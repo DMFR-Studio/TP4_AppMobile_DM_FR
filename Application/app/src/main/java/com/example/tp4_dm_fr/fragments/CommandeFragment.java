@@ -7,9 +7,6 @@ import static com.example.tp4_dm_fr.MainActivity.listePizzasCommande;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +17,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.tp4_dm_fr.CommandeItemAdapter;
+import com.example.tp4_dm_fr.adapter.CommandeItemAdapter;
 import com.example.tp4_dm_fr.R;
 
 public class CommandeFragment extends Fragment {
@@ -38,7 +35,7 @@ public class CommandeFragment extends Fragment {
         montantEconomise = (TextView) view.findViewById(R.id.montantEconomise);
         ajouterAuPanier = (Button) view.findViewById(R.id.ajouterAuPanier);
 
-        if(commande != null){
+        if (commande != null) {
             montantCommande.setText(String.valueOf(commande.getMontant()));
             totalAvecPoints.setText(String.valueOf(montantAvecPoints()));
             montantEconomise.setText(String.valueOf(montantEconomiser()));
@@ -51,7 +48,7 @@ public class CommandeFragment extends Fragment {
         ajouterAuPanier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder alert = createAlertWindow(view.getContext(), "ADD TO CART", "Passer à la caisse pour paiement par carte");
+                AlertDialog.Builder alert = createAlertWindow(view.getContext(), (String) getText(R.string.strAddToCard), (String) getText(R.string.strPasserCaisse));
                 alert.create().show();
             }
         });
@@ -60,7 +57,7 @@ public class CommandeFragment extends Fragment {
     }
 
     public void ajouterSamplePizzas(View view) {
-        ListView listView = view.findViewById(R.id.commandeListView); // Assurez-vous d'avoir un ListView dans votre layout XML
+        ListView listView = view.findViewById(R.id.commandeListView);
 
         CommandeItemAdapter adapter = new CommandeItemAdapter(getContext(), listePizzasCommande, this);
         listView.setAdapter(adapter);
@@ -74,20 +71,20 @@ public class CommandeFragment extends Fragment {
         }
     }
 
-    public double montantAvecPoints(){
+    public double montantAvecPoints() {
         double nbPoints = clientLoggedIn.getPoints();
 
-        if(nbPoints > commande.getMontant()){
+        if (nbPoints > commande.getMontant()) {
             return 0.0;
         } else {
             return commande.getMontant() - nbPoints;
         }
     }
 
-    public double montantEconomiser(){
+    public double montantEconomiser() {
         double nbPoints = clientLoggedIn.getPoints();
 
-        if(nbPoints > commande.getMontant()){
+        if (nbPoints > commande.getMontant()) {
             return commande.getMontant();
         } else {
             return nbPoints;
@@ -103,12 +100,12 @@ public class CommandeFragment extends Fragment {
 
         builder.setView(dialogView);
         builder.setTitle(title);
-        builder.setPositiveButton("OUI", (dialog, which) -> {
+        builder.setPositiveButton(getText(R.string.strOui), (dialog, which) -> {
             FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
             transaction.replace(R.id.frame, new FragmentVide());
             transaction.commit();
         });
-        builder.setNegativeButton("NON", (dialog, which) -> {
+        builder.setNegativeButton(getText(R.string.strNon), (dialog, which) -> {
 
         });
 

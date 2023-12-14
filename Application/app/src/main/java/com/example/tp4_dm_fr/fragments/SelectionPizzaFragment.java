@@ -5,14 +5,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.tp4_dm_fr.ConsommationREST;
-import com.example.tp4_dm_fr.PizzaItem;
-import com.example.tp4_dm_fr.PizzaItemAdapter;
+import com.example.tp4_dm_fr.customListener.OnAllPizzasResponseListener;
+import com.example.tp4_dm_fr.entity.PizzaItem;
+import com.example.tp4_dm_fr.adapter.PizzaItemAdapter;
 import com.example.tp4_dm_fr.R;
 
 import java.util.ArrayList;
@@ -34,21 +34,20 @@ public class SelectionPizzaFragment extends Fragment {
         ListView listView = view.findViewById(R.id.pizzaListView);
         List<PizzaItem> items = new ArrayList<>();
 
-        consoRest.getAllPizzas(view.getContext(), new ConsommationREST.OnAllPizzasResponseListener() {
+        consoRest.getAllPizzas(view.getContext(), new OnAllPizzasResponseListener() {
             @Override
             public void onAllPizzasResponse(List<PizzaItem> pizzaItemList) {
                 int image = 0;
-                //TODO ajouter image pour différentes pizzas
                 for (PizzaItem pizzaItem : pizzaItemList) {
-                    if(pizzaItem.getSorte().equals("Fromage")){
+                    if (pizzaItem.getSorte().equals("Fromage")) {
                         image = R.drawable.fromage;
-                    } else if(pizzaItem.getSorte().equals("Pepperoni")){
+                    } else if (pizzaItem.getSorte().equals("Pepperoni")) {
                         image = R.drawable.pepperoni;
-                    } else if(pizzaItem.getSorte().equals("Garnie")){
+                    } else if (pizzaItem.getSorte().equals("Garnie")) {
                         image = R.drawable.garnie;
-                    } else if(pizzaItem.getSorte().equals("Hawaienne")){
+                    } else if (pizzaItem.getSorte().equals("Hawaienne")) {
                         image = R.drawable.hawaienne;
-                    } else if(pizzaItem.getSorte().equals("Bacon")){
+                    } else if (pizzaItem.getSorte().equals("Bacon")) {
                         image = R.drawable.bacon;
                     }
                     items.add(new PizzaItem(image, pizzaItem.getSorte(), pizzaItem.getType(), pizzaItem.getPrix()));
@@ -60,9 +59,8 @@ public class SelectionPizzaFragment extends Fragment {
 
             @Override
             public void onAllPizzasError() {
-                Log.e("Pizza", "Erreur lors de la récupération de la liste de pizzas");
+                Log.e((String) getText(R.string.strPizza), (String) getText(R.string.strErreurPizza));
             }
         });
     }
-
 }

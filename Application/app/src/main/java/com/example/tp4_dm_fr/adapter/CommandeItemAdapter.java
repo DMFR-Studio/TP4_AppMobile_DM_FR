@@ -1,4 +1,4 @@
-package com.example.tp4_dm_fr;
+package com.example.tp4_dm_fr.adapter;
 
 import static com.example.tp4_dm_fr.MainActivity.commande;
 
@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.tp4_dm_fr.R;
+import com.example.tp4_dm_fr.entity.PizzaItem;
 import com.example.tp4_dm_fr.fragments.CommandeFragment;
 
 import java.util.List;

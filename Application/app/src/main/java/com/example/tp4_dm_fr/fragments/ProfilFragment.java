@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.tp4_dm_fr.Client;
+import com.example.tp4_dm_fr.entity.Client;
 import com.example.tp4_dm_fr.ConsommationREST;
 import com.example.tp4_dm_fr.MainActivity;
 import com.example.tp4_dm_fr.customListener.OnUserAddedListener;
@@ -53,7 +53,7 @@ public class ProfilFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!isNameValid()){
+                if (!isNameValid()) {
                     nomInput.setError(getText(R.string.strNomInvaldie));
                     nameIsValid = false;
                 } else {
@@ -75,7 +75,7 @@ public class ProfilFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!isEmailValid()){
+                if (!isEmailValid()) {
                     emailInput.setError(getText(R.string.strCourrielInvalide));
                     emailIsValid = false;
                 } else {
@@ -97,7 +97,7 @@ public class ProfilFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!isPasswordValid()){
+                if (!isPasswordValid()) {
                     passwordInput.setError(getText(R.string.strMotDePasse));
                     passwordIsValid = false;
                 } else {
@@ -138,7 +138,7 @@ public class ProfilFragment extends Fragment {
         return passwordInput.getText().toString().length() > 5;
     }
 
-    private boolean isNameValid(){
+    private boolean isNameValid() {
         return nomInput.getText().toString().length() > 4;
     }
 
