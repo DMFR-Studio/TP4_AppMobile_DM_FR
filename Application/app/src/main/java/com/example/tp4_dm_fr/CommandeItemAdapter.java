@@ -41,7 +41,9 @@ public class CommandeItemAdapter extends ArrayAdapter {
         imageView.setImageResource(currentItem.getImageResource());
         nomPizza.setText(currentItem.getSorte() + " - " + currentItem.getType());
         prix.setText("Prix: " + String.valueOf(currentItem.getPrix()));
-        quantiteTextView.setText("0");
+        quantiteTextView.setText("1");
+        String montantString = prix.getText().toString().substring(prix.getText().toString().indexOf(":") + 1).trim();
+        total.setText("Total: " + Double.parseDouble(montantString));
 
         // Définir le listener pour le bouton d'ajout
 
@@ -54,7 +56,7 @@ public class CommandeItemAdapter extends ArrayAdapter {
                 String montantString = prix.getText().toString().substring(prix.getText().toString().indexOf(":") + 1).trim();
                 total.setText("Total: " + Double.parseDouble(montantString) * (quantite + 1));
                 if(commande != null){
-                    commande.setMontant(commande.getMontant() + Double.parseDouble(total.getText().toString()));
+                    commande.setMontant(commande.getMontant() + Double.parseDouble(montantString) * (quantite + 1));
                 }
             }
         });
@@ -70,7 +72,7 @@ public class CommandeItemAdapter extends ArrayAdapter {
                     String montantString = prix.getText().toString().substring(prix.getText().toString().indexOf(":") + 1).trim();
                     total.setText("Total: " + Double.parseDouble(montantString) * (quantite - 1));
                     if(commande != null){
-                        commande.setMontant(commande.getMontant() + Double.parseDouble(total.getText().toString()));
+                        commande.setMontant(commande.getMontant() + Double.parseDouble(montantString) * (quantite - 1));
                     }
                 }
             }

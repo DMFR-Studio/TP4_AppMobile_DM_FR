@@ -86,8 +86,11 @@ public class PizzaItemAdapter extends ArrayAdapter {
                 } else {
                     commande.setMontant(commande.getMontant() + montant);
                 }
-                listePizzasCommande.add(currentItem);
-
+                PizzaItem pizzaAjout = new PizzaItem(currentItem.getImageResource(),
+                        nomPizza.getText().toString(),
+                        format.getText().toString(),
+                        Double.parseDouble(prix.getText().toString()));
+                listePizzasCommande.add(pizzaAjout);
             }
         });
 

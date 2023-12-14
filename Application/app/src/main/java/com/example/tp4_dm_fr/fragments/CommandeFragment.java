@@ -24,10 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommandeFragment extends Fragment {
-    private List<PizzaItem> listeCommandes = new ArrayList<>();
-    private TextView quantiteTextView;
-    private Button ajouterBouton;
-    private Button enleverBouton;
     private TextView montantCommande;
 
     @Override

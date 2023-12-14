@@ -24,7 +24,7 @@ import java.util.Map;
 
 public class ConsommationREST {
     public void addUser(Context context, String nom, String courriel, String mot_de_passe, String adresse, String telephone, OnUserAddedListener listener) {
-        String url = "http://192.168.2.134:8081/addClient";
+        String url = "http://192.168.0.119:8081/addClient";
 
         RequestQueue queue = Volley.newRequestQueue(context);
 
@@ -73,7 +73,7 @@ public class ConsommationREST {
 
 
     public void logInUser(Context context, String courriel, String mot_de_passe, OnLoginResultListener listener) {
-        String url = "http://192.168.2.134:8081/logIn";
+        String url = "http://192.168.0.119:8081/logIn";
         RequestQueue queue = Volley.newRequestQueue(context);
 
         JSONObject postData = new JSONObject();
@@ -109,7 +109,7 @@ public class ConsommationREST {
     }
 
     public void getCommande(Context context, String clientId, OnCommandeResponseListener listener) {
-        String url = "http://192.168.2.134:8081/getCommandes?id=" + clientId;
+        String url = "http://192.168.0.119:8081/getCommandes?id=" + clientId;
 
         RequestQueue queue = Volley.newRequestQueue(context);
 
@@ -134,7 +134,7 @@ public class ConsommationREST {
     }
 
     public void getPizza(Context context, String pizzaId, OnPizzaResponseListener listener) {
-        String url = "http://192.168.2.134:8081/getPizza?id=" + pizzaId;
+        String url = "http://192.168.0.119:8081/getPizza?id=" + pizzaId;
 
         RequestQueue queue = Volley.newRequestQueue(context);
 
@@ -153,7 +153,7 @@ public class ConsommationREST {
     }
 
     public void getAllPizzas(Context context, OnAllPizzasResponseListener listener) {
-        String url = "http://192.168.2.134:8081/getAllPizzas";
+        String url = "http://192.168.0.119:8081/getAllPizzas";
 
         RequestQueue queue = Volley.newRequestQueue(context);
 
