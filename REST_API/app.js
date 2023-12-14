@@ -16,22 +16,36 @@ app.post("/addClient", (req, res) => {
   conn.query(
     "INSERT INTO client(nom, courriel, mot_de_passe, adresse, telephone, points) VALUES(?,?,?,?,?,?);",
     [nom, courriel, mot_de_passe, adresse, telephone, points],
-    (err, rows, fields) => {
-      !err ? res.sendStatus(200) : res.sendStatus(400);
+    (err, result) => {
+      if (!err && result.affectedRows > 0) {
+        const id = result.insertId;
+        res.send({ id, adresse, points });
+      } else {
+        console.error(err);
+        res.sendStatus(400);
+      }
     }
   );
 });
 
+
+
 app.post("/logIn", (req, res) => {
   const { courriel, mot_de_passe } = req.body;
   conn.query(
-    "SELECT * from client WHERE courriel = ? AND mot_de_passe = ?",
+    "SELECT id, adresse, points FROM client WHERE courriel = ? AND mot_de_passe = ?",
     [courriel, mot_de_passe],
     (err, rows, fields) => {
-      !err ? res.sendStatus(200) : res.sendStatus(400);
+      if (!err && rows.length > 0) {
+        const { id, adresse, points } = rows[0];
+        res.send({ id, adresse, points });
+      } else {
+        res.sendStatus(400);
+      }
     }
   );
 });
+
 
 app.get("/getClient", (req, res) => {
   const id = req.body.id;
@@ -100,6 +114,12 @@ app.post("/addPizza", (req, res) => {
 app.get("/getPizza", (req, res) => {
   const id = req.body.id;
   conn.query("SELECT * from pizza WHERE id = ?", [id], (err, rows, fields) => {
+    !err ? res.send(rows) : res.sendStatus(400);
+  });
+});
+
+app.get("/getAllPizzas", (req, res) => {
+  conn.query("SELECT * from pizza", (err, rows, fields) => {
     !err ? res.send(rows) : res.sendStatus(400);
   });
 });
