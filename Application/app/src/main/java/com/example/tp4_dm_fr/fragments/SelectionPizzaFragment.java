@@ -1,14 +1,15 @@
 package com.example.tp4_dm_fr.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.tp4_dm_fr.ConsommationREST;
 import com.example.tp4_dm_fr.PizzaItem;
 import com.example.tp4_dm_fr.PizzaItemAdapter;
 import com.example.tp4_dm_fr.R;
@@ -19,6 +20,7 @@ import java.util.List;
 public class SelectionPizzaFragment extends Fragment {
 
     private View view;
+    ConsommationREST consoRest = new ConsommationREST();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,13 +31,32 @@ public class SelectionPizzaFragment extends Fragment {
     }
 
     private void afficherPizzas(View view) {
-        //TODO: remplacer par toutes les pizzas dispo avec un call d'api
-        ListView listView = view.findViewById(R.id.pizzaListView); // Assurez-vous d'avoir un ListView dans votre layout XML
+        ListView listView = view.findViewById(R.id.pizzaListView);
         List<PizzaItem> items = new ArrayList<>();
-        items.add(new PizzaItem(R.drawable.image_pizza_1, "Texte 1", PizzaItem.Format.MOYENNE, 5.00));
-        items.add(new PizzaItem(R.drawable.image_pizza_1, "Texte 2", PizzaItem.Format.LARGE, 7.00));
 
-        PizzaItemAdapter adapter = new PizzaItemAdapter(getContext(), items);
-        listView.setAdapter(adapter);
+        consoRest.getAllPizzas(view.getContext(), new ConsommationREST.OnAllPizzasResponseListener() {
+            @Override
+            public void onAllPizzasResponse(List<PizzaItem> pizzaItemList) {
+                int image = 0;
+                //TODO ajouter image pour différentes pizzas
+                for (PizzaItem pizzaItem : pizzaItemList) {
+                    if(pizzaItem.getSorte().equals("Fromage")){
+                        image = R.drawable.fromage;
+                    } else if(pizzaItem.getSorte().equals("Pepperoni")){
+                        image = R.drawable.image_pizza_1;
+                    }
+                    items.add(new PizzaItem(image, pizzaItem.getSorte(), pizzaItem.getType(), pizzaItem.getPrix()));
+                }
+
+                PizzaItemAdapter adapter = new PizzaItemAdapter(view.getContext(), items);
+                listView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onAllPizzasError() {
+                Log.e("Pizza", "Erreur lors de la récupération de la liste de pizzas");
+            }
+        });
     }
+
 }

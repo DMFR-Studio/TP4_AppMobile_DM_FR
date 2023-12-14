@@ -1,6 +1,7 @@
 package com.example.tp4_dm_fr;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,11 +37,15 @@ public class PizzaItemAdapter extends ArrayAdapter {
         PizzaItem currentItem = itemList.get(position);
 
         imageView.setImageResource(currentItem.getImageResource());
-        nomPizza.setText(currentItem.getNom());
-        format.setText(currentItem.getFormat().toString());
+        nomPizza.setText(currentItem.getSorte());
+        format.setText(currentItem.getType());
         prix.setText(String.valueOf(currentItem.getPrix()));
 
-        String[] options = {PizzaItem.Format.PETITE.name() + " 5.00$", PizzaItem.Format.MOYENNE.name() + " 10.00$", PizzaItem.Format.LARGE.name() + " 15.00$"};
+        double prixPetite = currentItem.getPrix();
+        double prixMoyenne = currentItem.getPrix()*1.15;
+        double prixGrande = currentItem.getPrix()*1.30;
+
+        String[] options = {"Petite " + prixPetite, "Moyenne " + prixMoyenne, "Grande " + prixGrande};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_spinner_item, options);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerFormat.setAdapter(adapter);
@@ -49,7 +54,13 @@ public class PizzaItemAdapter extends ArrayAdapter {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = (String) parent.getItemAtPosition(position);
-                // Faire quelque chose avec l'élément sélectionné
+                String[] parts = selectedItem.split(" ");
+                double selectedPrice = Double.parseDouble(parts[1]);
+                String selectedType = parts[0];
+
+                prix.setText(String.valueOf(selectedPrice));
+                format.setText(selectedType);
+                Log.i("selectedItem", String.valueOf(selectedPrice));
             }
 
             @Override

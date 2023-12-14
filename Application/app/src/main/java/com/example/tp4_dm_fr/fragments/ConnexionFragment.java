@@ -1,14 +1,10 @@
 package com.example.tp4_dm_fr.fragments;
 
-import static com.example.tp4_dm_fr.MainActivity.clientLoggedIn;
-
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.tp4_dm_fr.ConsommationREST;
-import com.example.tp4_dm_fr.OnLoginResultListener;
+import com.example.tp4_dm_fr.customListener.OnLoginResultListener;
 import com.example.tp4_dm_fr.R;
 import com.google.android.material.navigation.NavigationView;
 

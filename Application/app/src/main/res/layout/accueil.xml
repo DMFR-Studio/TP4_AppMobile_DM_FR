@@ -41,7 +41,7 @@
         android:id="@+id/imageView3"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/image_pizza_2"
+        android:src="@drawable/fromage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.2"
         app:layout_constraintTop_toBottomOf="@+id/textView"

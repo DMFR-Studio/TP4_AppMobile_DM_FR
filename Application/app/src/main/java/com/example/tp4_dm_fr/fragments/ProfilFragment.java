@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.example.tp4_dm_fr.Client;
 import com.example.tp4_dm_fr.ConsommationREST;
 import com.example.tp4_dm_fr.MainActivity;
-import com.example.tp4_dm_fr.OnUserAddedListener;
+import com.example.tp4_dm_fr.customListener.OnUserAddedListener;
 import com.example.tp4_dm_fr.R;
 
 import java.util.regex.Matcher;

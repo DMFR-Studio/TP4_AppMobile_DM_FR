@@ -37,10 +37,10 @@ public class CommandeFragment extends Fragment {
         //TODO: remplacer par les vraies pizzas de la commande
         ListView listView = view.findViewById(R.id.commandeListView); // Assurez-vous d'avoir un ListView dans votre layout XML
         List<PizzaItem> items = new ArrayList<>();
-        items.add(new PizzaItem(R.drawable.image_pizza_1, "Texte 1", PizzaItem.Format.MOYENNE, 5.00));
-        items.add(new PizzaItem(R.drawable.image_pizza_1, "Texte 2", PizzaItem.Format.LARGE, 7.00));
-        items.add(new PizzaItem(R.drawable.image_pizza_1, "Texte 2", PizzaItem.Format.LARGE, 7.00));
-        items.add(new PizzaItem(R.drawable.image_pizza_1, "Texte 2", PizzaItem.Format.LARGE, 7.00));
+//        items.add(new PizzaItem(R.drawable.image_pizza_1, "Texte 1", PizzaItem.Format.MOYENNE, 5.00));
+//        items.add(new PizzaItem(R.drawable.image_pizza_1, "Texte 2", PizzaItem.Format.LARGE, 7.00));
+//        items.add(new PizzaItem(R.drawable.image_pizza_1, "Texte 2", PizzaItem.Format.LARGE, 7.00));
+//        items.add(new PizzaItem(R.drawable.image_pizza_1, "Texte 2", PizzaItem.Format.LARGE, 7.00));
 
         CommandeItemAdapter adapter = new CommandeItemAdapter(getContext(), items);
         listView.setAdapter(adapter);

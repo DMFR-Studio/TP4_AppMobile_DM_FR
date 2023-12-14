@@ -12,8 +12,14 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.tp4_dm_fr.customListener.OnLoginResultListener;
+import com.example.tp4_dm_fr.customListener.OnUserAddedListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ConsommationREST {
@@ -98,6 +104,63 @@ public class ConsommationREST {
                 });
 
         queue.add(jsonObjectRequest);
+    }
+
+    public void getPizza(Context context, String pizzaId, OnPizzaResponseListener listener) {
+        String url = "http://192.168.2.134:8081/getPizza?id=" + pizzaId;
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                response -> {
+                    // Traitement de la réponse
+                    listener.onPizzaResponse(response);
+                },
+                error -> {
+                    // Gestion de l'erreur
+                    Log.e("api", String.valueOf(error));
+                    listener.onPizzaError();
+                });
+
+        queue.add(stringRequest);
+    }
+
+    public void getAllPizzas(Context context, OnAllPizzasResponseListener listener) {
+        String url = "http://192.168.2.134:8081/getAllPizzas";
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                response -> {
+                    // Traitement de la réponse
+                    List<PizzaItem> pizzaItemList = parsePizzaList(response);
+                    listener.onAllPizzasResponse(pizzaItemList);
+                },
+                error -> {
+                    // Gestion de l'erreur
+                    Log.e("api", String.valueOf(error));
+                    listener.onAllPizzasError();
+                });
+
+        queue.add(stringRequest);
+    }
+
+    private List<PizzaItem> parsePizzaList(String response) {
+        Gson gson = new Gson();
+        Type listType = new TypeToken<List<PizzaItem>>(){}.getType();
+        return gson.fromJson(response, listType);
+    }
+
+    public interface OnPizzaResponseListener {
+        void onPizzaResponse(String response);
+
+        void onPizzaError();
+    }
+
+    public interface OnAllPizzasResponseListener {
+        void onAllPizzasResponse(List<PizzaItem> pizzaItemList);
+
+        void onAllPizzasError();
     }
 
 

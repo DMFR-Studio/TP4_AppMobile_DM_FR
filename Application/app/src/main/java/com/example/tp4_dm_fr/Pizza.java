@@ -2,10 +2,10 @@ package com.example.tp4_dm_fr;
 
 public class Pizza {
     private String nom;
-    private PizzaItem.Format format;
+    private String format;
     private double prix;
 
-    public Pizza(String nom, PizzaItem.Format format, double prix) {
+    public Pizza(String nom, String format, double prix) {
         this.nom = nom;
         this.format = format;
         this.prix = prix;
@@ -19,11 +19,11 @@ public class Pizza {
         this.nom = nom;
     }
 
-    public PizzaItem.Format getFormat() {
+    public String getFormat() {
         return format;
     }
 
-    public void setFormat(PizzaItem.Format format) {
+    public void setFormat(String format) {
         this.format = format;
     }
 

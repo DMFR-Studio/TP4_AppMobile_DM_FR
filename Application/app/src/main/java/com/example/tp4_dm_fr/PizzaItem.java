@@ -2,14 +2,14 @@ package com.example.tp4_dm_fr;
 
 public class PizzaItem {
     private int imageResource;
-    private String nom;
-    private Format format;
+    private String sorte;
+    private String type;
     private double prix;
 
-    public PizzaItem(int imageResource, String nom, Format format, double prix) {
+    public PizzaItem(int imageResource, String sorte, String type, double prix) {
         this.imageResource = imageResource;
-        this.nom = nom;
-        this.format = format;
+        this.sorte = sorte;
+        this.type = type;
         this.prix = prix;
     }
 
@@ -21,20 +21,20 @@ public class PizzaItem {
         this.imageResource = imageResource;
     }
 
-    public String getNom() {
-        return nom;
+    public String getSorte() {
+        return sorte;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setSorte(String sorte) {
+        this.sorte = sorte;
     }
 
-    public Format getFormat() {
-        return format;
+    public String getType() {
+        return type;
     }
 
-    public void setFormat(Format format) {
-        this.format = format;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public double getPrix() {
@@ -45,9 +45,4 @@ public class PizzaItem {
         this.prix = prix;
     }
 
-    public enum Format{
-        PETITE,
-        MOYENNE,
-        LARGE
-    }
 }

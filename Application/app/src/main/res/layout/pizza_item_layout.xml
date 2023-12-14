@@ -7,22 +7,22 @@
 
     <ImageView
         android:id="@+id/pizzaImageView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="160dp"
+        android:layout_height="201dp"
         android:layout_marginStart="24dp"
         android:maxWidth="0dp"
         android:src="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.4"
-        app:layout_constraintHeight_percent="0.8"/>
+        app:layout_constraintWidth_percent="0.4" />
 
     <TextView
         android:id="@+id/nomPizzatextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:text="Fromage"
         app:layout_constraintStart_toEndOf="@+id/pizzaImageView"
@@ -50,22 +50,22 @@
 
     <Spinner
         android:id="@+id/spinnerFormat"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.1"
+        android:layout_width="159dp"
+        android:layout_height="72dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="@+id/prixtextView"
+        app:layout_constraintHeight_percent="0.1"
         app:layout_constraintStart_toStartOf="@+id/nomPizzatextView"
         app:layout_constraintTop_toBottomOf="@+id/prixtextView" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="155dp"
+        android:layout_height="57dp"
         android:layout_marginTop="20dp"
-        android:text="ajouter"
         android:backgroundTint="@color/black"
+        android:onClick="onAjouterPizza"
+        android:text="ajouter"
         android:textAllCaps="true"
         app:layout_constraintEnd_toEndOf="@+id/spinnerFormat"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerFormat"
-        android:onClick="onAjouterPizza"/>
+        app:layout_constraintTop_toBottomOf="@+id/spinnerFormat" />
 </androidx.constraintlayout.widget.ConstraintLayout>
