@@ -45,6 +45,11 @@ public class ConsommationREST {
                     try {
                         JSONObject jsonResponse = new JSONObject(response);
                         int idClient = jsonResponse.getInt("id");
+                        String adresseClient = jsonResponse.getString("adresse");
+                        double pointsClient = jsonResponse.getDouble("points");
+                        clientLoggedIn.setId(idClient);
+                        clientLoggedIn.setAdresse(adresseClient);
+                        clientLoggedIn.setPoints(pointsClient);
                         Log.i("api", "user added successfully with ID: " + idClient);
                         listener.onUserAdded(idClient);
                     } catch (JSONException e) {
@@ -90,8 +95,10 @@ public class ConsommationREST {
                     try {
                         int idClient = response.getInt("id");
                         String adresseClient = response.getString("adresse");
+                        int pointsClient = response.getInt("points");
                         clientLoggedIn.setId(idClient);
                         clientLoggedIn.setAdresse(adresseClient);
+                        clientLoggedIn.setPoints(pointsClient);
                         listener.onLoginResult(true, idClient);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -106,6 +113,32 @@ public class ConsommationREST {
                 });
 
         queue.add(jsonObjectRequest);
+    }
+
+    public void getClient(Context context, String clientId, OnClientResponseListener listener) {
+        String url = "http://192.168.0.119:8081/getClient?id=" + clientId;
+        Client client = new Client();
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                response -> {
+                    // Traitement de la réponse
+                    listener.onClientResponse(response);
+                },
+                error -> {
+                    // Gestion de l'erreur
+                    Log.e("api", String.valueOf(error));
+                    listener.onClientError();
+                });
+
+        queue.add(stringRequest);
+    }
+
+    public interface OnClientResponseListener {
+        void onClientResponse(String response);
+
+        void onClientError();
     }
 
     public void getCommande(Context context, String clientId, OnCommandeResponseListener listener) {

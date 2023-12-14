@@ -16,7 +16,7 @@ public class PointsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.points_layout, container, false);
         TextView points = view.findViewById(R.id.pointsTextView);
-        points.setText(R.string.mes_points + "\n" + MainActivity.clientLoggedIn.getPoints());
+        points.setText(getString(R.string.mes_points) + "\n" + MainActivity.clientLoggedIn.getPoints());
         return view;
     }
 }

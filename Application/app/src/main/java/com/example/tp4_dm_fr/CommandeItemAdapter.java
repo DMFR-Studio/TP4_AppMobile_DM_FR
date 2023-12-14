@@ -11,16 +11,26 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.tp4_dm_fr.fragments.CommandeFragment;
+
 import java.util.List;
 
 public class CommandeItemAdapter extends ArrayAdapter {
     private Context context;
     private List<PizzaItem> itemList;
+    private CommandeFragment commandeFragment;
 
-    public CommandeItemAdapter(Context context, List<PizzaItem> itemList) {
+    public CommandeItemAdapter(Context context, List<PizzaItem> itemList, CommandeFragment commandeFragment) {
         super(context, R.layout.pizza_item_layout, itemList);
         this.context = context;
         this.itemList = itemList;
+        this.commandeFragment = commandeFragment;
+    }
+
+    private void notifyCommandeFragment() {
+        if (commandeFragment != null) {
+            commandeFragment.updateMontantText();
+        }
     }
 
     @Override
@@ -55,8 +65,9 @@ public class CommandeItemAdapter extends ArrayAdapter {
                 //extrait le montant du textView ayant le prix unitaire d'une pizza
                 String montantString = prix.getText().toString().substring(prix.getText().toString().indexOf(":") + 1).trim();
                 total.setText("Total: " + Double.parseDouble(montantString) * (quantite + 1));
-                if(commande != null){
-                    commande.setMontant(commande.getMontant() + Double.parseDouble(montantString) * (quantite + 1));
+                if (commande != null) {
+                    commande.setMontant(commande.getMontant() + Double.parseDouble(montantString));
+                    notifyCommandeFragment();
                 }
             }
         });
@@ -71,9 +82,10 @@ public class CommandeItemAdapter extends ArrayAdapter {
                     quantiteTextView.setText(String.valueOf(quantite - 1));
                     String montantString = prix.getText().toString().substring(prix.getText().toString().indexOf(":") + 1).trim();
                     total.setText("Total: " + Double.parseDouble(montantString) * (quantite - 1));
-                    if(commande != null){
-                        commande.setMontant(commande.getMontant() + Double.parseDouble(montantString) * (quantite - 1));
-                    }
+                }
+                if (commande != null) {
+                    commande.setMontant(commande.getMontant() - Double.parseDouble(montantString));
+                    notifyCommandeFragment();
                 }
             }
         });

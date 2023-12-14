@@ -81,8 +81,7 @@ public class PizzaItemAdapter extends ArrayAdapter {
                 double montant = Double.parseDouble(prix.getText().toString());
                 if(commande == null){
                     LocalDate date = LocalDate.now();
-                    commande = new Commande(montant,clientLoggedIn.getAdresse(),String.valueOf(date),2);
-//                    commande = new Commande(montant,clientLoggedIn.getAdresse(),String.valueOf(date),clientLoggedIn.getId());
+                    commande = new Commande(montant,clientLoggedIn.getAdresse(),String.valueOf(date),clientLoggedIn.getId());
                 } else {
                     commande.setMontant(commande.getMontant() + montant);
                 }
