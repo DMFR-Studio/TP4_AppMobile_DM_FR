@@ -1,4 +1,4 @@
-package com.example.tp4_dm_fr;
+package com.example.tp4_dm_fr.fragments;
 
 import static com.example.tp4_dm_fr.MainActivity.clientLoggedIn;
 
@@ -14,10 +14,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.tp4_dm_fr.ConsommationREST;
+import com.example.tp4_dm_fr.OnLoginResultListener;
+import com.example.tp4_dm_fr.R;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.regex.Matcher;
@@ -101,7 +106,11 @@ public class ConnexionFragment extends Fragment {
                             public void onLoginResult(boolean success, int id) {
                                 if (true) {
                                 //if (success && id != 0) {
-                                    //TODO change view
+                                    //TODO: tester si le changement de vue fonctionne
+                                    FragmentTransaction transaction = new ConnexionFragment().getChildFragmentManager().beginTransaction();
+                                    transaction.replace(R.id.frame, new SelectionPizzaFragment());
+                                    transaction.commit();
+                                    ((ImageView)(view.findViewById(R.id.icone_user))).setVisibility(View.VISIBLE);
                                     NavigationView navView = (NavigationView) view.findViewById(R.id.navigation);
                                     for (int i = 0; i < navView.getMenu().size(); i++) {
                                         navView.getMenu().getItem(i).setVisible(true);

@@ -9,8 +9,14 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     app:navigationIcon="@drawable/menu_icon"
     app:titleTextColor="#FFF">
+
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/logo"/>
+        android:id="@+id/icone_user"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:src="@drawable/user_icon"
+        android:layout_marginLeft="300dp"
+        android:visibility="gone"
+        android:onClick="onAfficherProfil"/>
 </androidx.appcompat.widget.Toolbar>

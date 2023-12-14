@@ -58,6 +58,9 @@ public class PizzaItemAdapter extends ArrayAdapter {
             }
         });
 
+        //TODO: ajouter la pizza dans l'instance statique du client (je suggère d'ajouter un
+        // attribut qui représente la commande dans le client)
+
         return listItemView;
     }
 }

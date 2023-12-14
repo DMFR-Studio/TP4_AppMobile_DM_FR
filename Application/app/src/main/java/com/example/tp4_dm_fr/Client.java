@@ -8,6 +8,7 @@ public class Client {
     private String mot_de_passe;
     private String adresse;
     private String telephone;
+    private double points;
 
     public Client() {
         id = 0;
@@ -59,5 +60,13 @@ public class Client {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public double getPoints() {
+        return points;
+    }
+
+    public void setPoints(double points) {
+        this.points = points;
     }
 }

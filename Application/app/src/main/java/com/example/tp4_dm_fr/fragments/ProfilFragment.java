@@ -1,4 +1,4 @@
-package com.example.tp4_dm_fr;
+package com.example.tp4_dm_fr.fragments;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -8,50 +8,47 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+
+import com.example.tp4_dm_fr.Client;
+import com.example.tp4_dm_fr.ConsommationREST;
+import com.example.tp4_dm_fr.MainActivity;
+import com.example.tp4_dm_fr.OnUserAddedListener;
+import com.example.tp4_dm_fr.R;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class InscriptionFragment extends Fragment {
-    private EditText nomInput;
-    private EditText emailInput;
-    private EditText passwordInput;
-    private EditText adresseInput;
-    private EditText telephoneInput;
-    private Button creationCompteButton;
-    private boolean passwordIsValid;
-    private boolean emailIsValid;
-    private boolean nameIsValid;
+public class ProfilFragment extends Fragment {
 
+    Button connexionLogInButton;
+    EditText emailInput;
+    EditText passwordInput;
+    EditText adresseInput;
+    EditText telephoneInput;
+    EditText nomInput;
+    private boolean emailIsValid;
+    private boolean passwordIsValid;
+    private boolean nameIsValid;
     ConsommationREST consoRest = new ConsommationREST();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_inscription, container, false);
+        View view = inflater.inflate(R.layout.profil_layout, container, false);
         passwordIsValid = false;
         emailIsValid = false;
         nameIsValid = false;
-        initFields(view);
+        remplirInformations(view);
+        ajouterListeners();
         return view;
     }
 
-    private void initFields(View view) {
-        nomInput = view.findViewById(R.id.nomEditText);
-        emailInput = view.findViewById(R.id.emailEditText);
-        passwordInput = view.findViewById(R.id.passwordEditText);
-        adresseInput = view.findViewById(R.id.adresseEditText);
-        telephoneInput = view.findViewById(R.id.telephoneEditText);
-        creationCompteButton = view.findViewById(R.id.creationCompteButton);
-        creationCompteButton.setEnabled(false);
+    private void ajouterListeners() {
         nomInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                creationCompteButton.setEnabled(areFieldsValid());
+                connexionLogInButton.setEnabled(areFieldsValid());
             }
 
             @Override
@@ -66,14 +63,14 @@ public class InscriptionFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                creationCompteButton.setEnabled(areFieldsValid());
+                connexionLogInButton.setEnabled(areFieldsValid());
             }
         });
 
         emailInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                creationCompteButton.setEnabled(areFieldsValid());
+                connexionLogInButton.setEnabled(areFieldsValid());
             }
 
             @Override
@@ -88,14 +85,14 @@ public class InscriptionFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                creationCompteButton.setEnabled(areFieldsValid());
+                connexionLogInButton.setEnabled(areFieldsValid());
             }
         });
 
         passwordInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                creationCompteButton.setEnabled(areFieldsValid());
+                connexionLogInButton.setEnabled(areFieldsValid());
             }
 
             @Override
@@ -110,15 +107,15 @@ public class InscriptionFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                creationCompteButton.setEnabled(areFieldsValid());
+                connexionLogInButton.setEnabled(areFieldsValid());
             }
         });
 
-        creationCompteButton.setOnClickListener(new View.OnClickListener() {
+        connexionLogInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 consoRest.addUser(
-                        view.getContext(),
+                        v.getContext(),
                         nomInput.getText().toString(),
                         emailInput.getText().toString(),
                         passwordInput.getText().toString(),
@@ -128,7 +125,7 @@ public class InscriptionFragment extends Fragment {
                             @Override
                             public void onUserAdded(int id) {
                                 if (id != 0) {
-                                    //TODO client est créé et logged in
+                                    //TODO: appeler la méthode de l'api qui modifie un utilisateur
                                 }
                             }
                         });
@@ -155,4 +152,19 @@ public class InscriptionFragment extends Fragment {
         return emailIsValid && passwordIsValid && nameIsValid;
     }
 
+    private void remplirInformations(View view) {
+        connexionLogInButton = view.findViewById(R.id.modificationCompteButton);
+        emailInput = view.findViewById(R.id.emailEditText);
+        passwordInput = view.findViewById(R.id.passwordEditText);
+        adresseInput = view.findViewById(R.id.adresseEditText);
+        telephoneInput = view.findViewById(R.id.telephoneEditText);
+        nomInput = view.findViewById(R.id.nomEditText);
+
+        Client client = MainActivity.clientLoggedIn;
+
+        nomInput.setText(client.getCourriel());
+        passwordInput.setText(client.getMot_de_passe());
+        adresseInput.setText(client.getAdresse());
+        telephoneInput.setText(client.getTelephone());
+    }
 }
